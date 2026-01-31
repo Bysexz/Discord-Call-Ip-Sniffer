@@ -14,3 +14,25 @@ Step 3: DependenciesBashpip install -r requirements.txt
 ``📈 Development Roadmap[ ] Phase 1: Core Sniffing Logic (Completed).[ ] Phase 2: Multi-Platform Support (Completed).[ ] Phase 3: Geo-IP Mapping (In Progress).[ ] Phase 4: Discord Token Encryption.[ ] Phase 5: Packet Injection Testing.🤝 ContributionContributions are what make the open-source community an amazing place to learn and create.Fork the Project.Create your Feature Branch (git checkout -b feature/AmazingFeature).Commit your Changes (git commit -m 'Add some AmazingFeature').Push to the Branch (git push origin feature/AmazingFeature).Open a Pull Request.📄 LicenseDistributed under the MIT License. See LICENSE for more information.
 
 >⚠️ Educational purposets only>!
+
+
+# Usage
+
+1️⃣ Environment Setup
+It is highly recommended to use a virtual environment to prevent dependency conflicts with other Python projects.
+
+Bash
+# Create a virtual environment
+python -m venv venv
+
+# Activate it
+# On Windows:
+venv\Scripts\activate
+# On Linux/Mac:
+source venv/bin/activate
+
+2️⃣ Library InstallationYou must install the specific dependencies required for network sniffing and Discord API interaction.Bash# Note: We use discord.py 1.7.3 for self-bot compatibility
+pip install discord.py==1.7.3 netifaces psutil
+discord.py 1.7.3: Essential for the self-bot connection.netifaces: Used to detect your local network adapters.psutil: Helps manage system processes during sniffing.3️⃣ Configuration (Token & Gateway)Open the discord_call_ip_sniffer.py file in your editor and modify the following lines at the top:TOKEN: Replace "YOUR_USER_TOKEN_HERE" with your account token.GATEWAY_IP: Set to your router's IP (e.g., 192.168.1.1) to filter out local noise, or leave as 127.0.0.1 for general testing.4️⃣ Launch with Elevated PrivilegesBecause this tool uses Raw Sockets to "listen" to network traffic, it requires kernel-level permissions.Windows: Right-click your Terminal/CMD and select "Run as Administrator".Linux: You must use sudo:Bashsudo python discord_call_ip_sniffer.py
+
+5️⃣ Interception ProcessStart the Script: The console should display Connected as [YourUser].Join a Voice Call: Enter any Discord channel or start a private call.Monitor Traffic: The script will automatically trigger when it detects you are in a voice state.Capture: Look for the [VOICE] logs. These show the <IP:Port> pairs currently sending audio data to your machine.Stop: Use Ctrl+C to terminate the session safely.🛠️ Execution SummaryRequirementDescriptionWhy?Admin/RootElevated PrivilegesTo open SOCK_RAW interfacesAuthUser TokenTo link the sniffer to your Discord accountNetworkActive Voice CallTraffic only exists during an active streamSafetyVirtual MachineRecommended to protect your host OS
